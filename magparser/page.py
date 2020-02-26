@@ -1,9 +1,9 @@
 from bs4 import BeautifulSoup
 import requests
 
-from magparser.ebook3000item import Ebook3000Item
+from magparser.item import Item
 
-class Ebook3000Page:
+class Page:
     def __init__(self, base_url):
         self.base_url = base_url
     
@@ -22,6 +22,7 @@ class Ebook3000Page:
 
         items = []
         for html_item in html_items:
-            items.append(Ebook3000Item(html_item))
+            items.append(Item(html_item, self.base_url[self.base_url.index('http:'): \
+                self.base_url.index('.com') + len('.com')]))
         
         return items

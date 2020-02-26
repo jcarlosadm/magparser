@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
 import datetime
 
-class Ebook3000Item:
-    def __init__(self, html):
+class Item:
+    def __init__(self, html, base):
         self.html = html
 
         self.title = html.find("div", {'class': 'list_box_title'}).find('a').find(text=True)
@@ -23,6 +23,5 @@ class Ebook3000Item:
             self.date = datetime.datetime.strptime(self.date[date_index:date_index+11].strip(), \
                 "%d %b %Y").date()
         
-        base = "http://www.ebook3000.com"
         self.image = base + html.find('div', {'class': 'list_box_lit'}).find('img')['src']
         self.link = base + html.find('div', {'class': 'list_box_title'}).find('a')['href']

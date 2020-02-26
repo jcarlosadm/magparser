@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+    <style>
+        img {
+            display: block;
+        }
+        div.item {
+            float: left;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form action="/" method="GET">
+        <select name="topics_select">
+            {% for topic in topics %}
+            <option value="{{topic}}" 
+                {% if topic == selected_topic %}
+                SELECTED
+                {% endif %}
+            >{{topic}}</option>"
+            {% endfor %}
+        </select>
+        <input type="date" name="date_limit" value="{{date_limit}}">
+        <input type="text" name="filter_title" value="{{filter_title}}">
+        <input type="submit">
+    </form>
+
+    {% for item in items %}
+    <div class="item">
+        <div>
+            <a href="{{item.link}}" title="{{item.title}}" target="_blank">
+                <img src="{{item.image}}">
+            </a>
+        </div>
+        <div>
+            <a href="{{item.file_url}}" target="_blank">link to file</a>
+        </div>
+    </div>
+    {% endfor %}
+</body>
+</html>
