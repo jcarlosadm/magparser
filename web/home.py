@@ -12,13 +12,15 @@ def home():
     keys = list(url_hash.keys())
     topic = get_topic(request.args, keys)
     date_limit = get_datelimit(request.args)
+    date_limit_2 = get_datelimit_2(request.args)
     filter_title = get_filter_title(request.args)
 
     return render_template('index.html', \
-        items = load_items(url_hash[topic], date_limit, filter_title),
+        items = load_items(url_hash[topic], date_limit, date_limit_2, filter_title),
         topics = keys,
         selected_topic = topic,
         date_limit=date_limit.strftime('%Y-%m-%d'),
+        date_limit_2=date_limit_2.strftime('%Y-%m-%d'),
         filter_title=filter_title)
 
 def get_topic(args, keys):
@@ -35,6 +37,15 @@ def get_datelimit(args):
         date_limit = datetime.datetime.now() - datetime.timedelta(days=10)
         date_limit = date_limit.date()
     return date_limit
+
+def get_datelimit_2(args):
+    if 'date_limit_2' in args:
+        date_limit_2 = datetime.datetime.strptime(args['date_limit_2'], '%Y-%m-%d').date()
+    else:
+        date_limit_2 = datetime.datetime.now()
+        date_limit_2 = date_limit_2.date()
+    return date_limit_2
+
 
 def get_filter_title(args):
     if 'filter_title' not in args:

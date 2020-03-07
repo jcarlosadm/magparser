@@ -16,6 +16,7 @@
 </head>
 <body>
     <form action="/" method="GET">
+        <label for="topics_select">topic: </label>
         <select name="topics_select">
             {% for topic in topics %}
             <option value="{{topic}}" 
@@ -25,7 +26,11 @@
             >{{topic}}</option>"
             {% endfor %}
         </select>
+        <label for="date_limit">start date: </label>
         <input type="date" name="date_limit" value="{{date_limit}}">
+        <label for="date_limit_2">end date: </label>
+        <input type="date" name="date_limit_2" value="{{date_limit_2}}">
+        <label for="filter_title">title: </label>
         <input type="text" name="filter_title" value="{{filter_title}}">
         <input type="submit">
     </form>
