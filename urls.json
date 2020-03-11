@@ -1,7 +1,8 @@
 {
     "science": "http://www.ebook3000.com/Magazine/Science-related/list_74_%s.html",
     "computer_related": "http://www.ebook3000.com/Magazine/Computer-related/list_64_%s.html",
-    "adult": "http://www.ebook3000.com/Magazine/For-Men/list_69_%s.html",
+    "forMen": "http://www.ebook3000.com/Magazine/For-Men/list_69_%s.html",
     "lifestyle": "http://www.ebook3000.com/Magazine/Fashion---Lifestyle/list_67_%s.html",
-    "economy": "http://www.ebook3000.com/Magazine/Economics--Business/list_66_%s.html"
+    "economy": "http://www.ebook3000.com/Magazine/Economics--Business/list_66_%s.html",
+    "forWoman": "http://www.ebook3000.com/Magazine/For-Women/list_70_%s.html"
 }
