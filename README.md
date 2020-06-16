@@ -21,4 +21,4 @@ To run:
 }
 ```
 
-4. run: `python test.py` and open the address on browser.
+4. run: `python main.py` and open the address on browser.
