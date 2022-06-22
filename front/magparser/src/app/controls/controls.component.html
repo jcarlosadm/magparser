@@ -49,10 +49,17 @@
                 </div>
             </div>
             <div class="row mt-1 mb-1">
-                <div class="col-md-4">
+                <div class="col-md-4" (click)="setFilter()">
                     <button class="btn btn-primary">Search</button>
                 </div>
             </div>
         </div>
     </form>
+
+    <page-content 
+        [selectedTopic]="selectedTopic"
+        [startDate]="filter.startDate"
+        [endDate]="filter.endDate"
+        [searchTerm]="filter.searchTerm">
+    </page-content>
 </div>

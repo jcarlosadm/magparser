@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Filter } from './filter';
 
 @Component({
   selector: 'controls',
@@ -12,6 +13,7 @@ export class ControlsComponent implements OnInit {
   startDate:Date;
   endDate:Date;
   searchTerm:string = "";
+  filter:Filter;
 
   constructor() {
     this.topics =  ['All','Science', 'Computer'];
@@ -25,6 +27,8 @@ export class ControlsComponent implements OnInit {
     this.startDate.setDate(this.startDate.getDate() - 5);
 
     this.endDate = new Date();
+
+    this.filter = new Filter(this.startDate, this.endDate, this.searchTerm);
   }
 
   ngOnInit(): void {
@@ -46,5 +50,11 @@ export class ControlsComponent implements OnInit {
     if (value != null) {
       this.selectedTopic = value;
     }
+  }
+
+  setFilter() {
+    this.filter.startDate = this.startDate;
+    this.filter.endDate = this.endDate;
+    this.filter.searchTerm = this.searchTerm;
   }
 }

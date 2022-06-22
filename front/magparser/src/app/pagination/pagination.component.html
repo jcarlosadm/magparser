@@ -1,0 +1,11 @@
+<div class="row mt-4">
+    <div *ngIf="currentPage > 1" class="col-sm-2">
+        <button class="btn btn-primary">Prev</button>
+    </div>
+    <div class="col-sm-1">
+        <p>{{currentPage}}</p>
+    </div>
+    <div *ngIf="hasNext" class="col-sm-2">
+        <button class="btn btn-primary">Next</button>
+    </div>
+</div>

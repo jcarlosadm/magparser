@@ -1,0 +1,10 @@
+<div class="row mt-4 mb-4">
+    <div class="col-sm-3" *ngFor="let magazine_ of magazines" >
+        <magazine [magazine]="magazine_"></magazine>
+    </div>
+</div>
+
+<pagination 
+    [currentPage]="currentPage" 
+    [hasNext]="hasNextPage">
+</pagination>
