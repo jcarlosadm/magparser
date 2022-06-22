@@ -11,11 +11,15 @@ export class ControlsComponent implements OnInit {
   selectedTopic:string;
   startDate:Date;
   endDate:Date;
+  searchTerm:string = "";
 
   constructor() {
-    this.topics =  ['Science', 'Computer'];
+    this.topics =  ['All','Science', 'Computer'];
     
-    this.selectedTopic = "Computer";
+    if (this.topics.length > 0)
+      this.selectedTopic = this.topics[0];
+    else
+      this.selectedTopic = '';
     
     this.startDate = new Date();
     this.startDate.setDate(this.startDate.getDate() - 5);
@@ -43,5 +47,4 @@ export class ControlsComponent implements OnInit {
       this.selectedTopic = value;
     }
   }
-
 }
