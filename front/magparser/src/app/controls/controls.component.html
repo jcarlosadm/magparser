@@ -1,0 +1,41 @@
+<div class="container mt-4 mb-4">
+    <form>
+        <div class="form-group">
+            <div class="row mt-4 mb-4">
+                <div class="col-sm-4">
+                    <div class="row mt-1 mb-1">
+                        <label class="col-sm-2 control-label">Topic</label>
+                        <div class="col-sm-10">
+                            <select class="form-control"
+                            (change)="setTopic(topicField.value)"
+                            #topicField>
+                                <option></option>
+                                <option *ngFor="let topic of topics" [selected]="selectedTopic == topic">{{topic}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="row mt-1 mb-1">
+                        <label class="col-sm-4 control-label">Start Date</label>
+                        <div class="col-sm-8">
+                            <input type="date" name="startDate" value="{{startDate | date:'yyyy-MM-dd'}}" 
+                            (change)="setStartDate(startDateField.valueAsDate)"
+                            #startDateField>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="row mt-1 mb-1">
+                        <label class="col-sm-4 control-label">End Date</label>
+                        <div class="col-sm-8">
+                            <input type="date" name="endDate" value="{{endDate | date:'yyyy-MM-dd'}}" 
+                            (change)="setEndDate(endDateField.valueAsDate)"
+                            #endDateField>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
