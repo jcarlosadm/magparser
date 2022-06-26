@@ -8,6 +8,8 @@ import { ControlsComponent } from './controls/controls.component';
 import { MainContentComponent } from './main-content/main-content.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { ContentComponent } from './content/content.component';
+import { MagazineService } from './main-content/magazine-service.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,10 +21,11 @@ import { ContentComponent } from './content/content.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [MagazineService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
