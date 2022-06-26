@@ -10,3 +10,9 @@ services:
       - '4200:4200'
     command: > 
       bash -c "npm install && ng serve --host 0.0.0.0 --port 4200 --poll 1"
+  angular-interactive:
+    build: ..
+    image: angular-image
+    volumes:
+      - '.:/usr/src/app'
+    command: tail -F anything
