@@ -1,11 +1,21 @@
-<div class="row mt-4">
-    <div *ngIf="currentPage > 1" class="col-sm-2">
-        <button class="btn btn-primary">Prev</button>
-    </div>
-    <div class="col-sm-1">
-        <p>{{currentPage}}</p>
-    </div>
-    <div *ngIf="hasNext" class="col-sm-2">
-        <button class="btn btn-primary">Next</button>
-    </div>
+<div class="mt-4">
+    <nav aria-label="Page">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" [class.disabled]="currentPage <= 1">
+                <a class="page-link" (click)="decrement()">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item disabled" aria-current="page">
+                <a class="page-link">
+                    {{currentPage}}
+                </a>
+            </li>
+            <li class="page-item" [class.disabled]="!hasNext">
+                <a class="page-link" (click)="increment()">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>
