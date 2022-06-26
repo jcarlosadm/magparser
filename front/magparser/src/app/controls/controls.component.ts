@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MagazineService } from '../main-content/magazine-service.service';
 import { Filter } from './filter';
 
 @Component({
@@ -8,21 +9,14 @@ import { Filter } from './filter';
 })
 export class ControlsComponent implements OnInit {
 
-  topics:string[];
-  selectedTopic:string;
+  topics:string[] = [];
+  selectedTopic:string = '';
   startDate:Date;
   endDate:Date;
   searchTerm:string = "";
   filter:Filter;
 
-  constructor() {
-    this.topics =  ['All','Science', 'Computer'];
-    
-    if (this.topics.length > 0)
-      this.selectedTopic = this.topics[0];
-    else
-      this.selectedTopic = '';
-    
+  constructor(private magService:MagazineService) {
     this.startDate = new Date();
     this.startDate.setDate(this.startDate.getDate() - 5);
 
@@ -32,6 +26,12 @@ export class ControlsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.magService.getTopics().subscribe((data:string[]) => {
+      this.topics = data;
+      if (this.topics.length > 0){
+        this.selectedTopic = this.topics[0];
+      }
+    });
   }
 
   setStartDate(date:Date | null){
@@ -49,6 +49,8 @@ export class ControlsComponent implements OnInit {
   setTopic(value:string | null) {
     if (value != null) {
       this.selectedTopic = value;
+      this.searchTerm = "";
+      this.setFilter();
     }
   }
 
