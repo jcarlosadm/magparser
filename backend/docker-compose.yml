@@ -1,0 +1,22 @@
+version: '3.5'
+services:
+  runner:
+    container_name: flask-runner
+    build: .
+    image: python38
+    volumes:
+      - '.:/usr/src/app'
+    ports:
+      - '5000:5000'
+    command: >
+      bash -c "virtualenv -p python3 .venv 
+      && source .venv/bin/activate 
+      && pip install -r requirements.txt 
+      && python app.py"
+  python-interactive:
+    container_name: python-interactive
+    build: .
+    image: python38
+    volumes:
+      - '.:/usr/src/app'
+    command: tail -F anything
