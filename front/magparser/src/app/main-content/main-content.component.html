@@ -6,5 +6,6 @@
 
 <pagination 
     [currentPage]="currentPage" 
-    [hasNext]="hasNextPage">
+    [hasNext]="hasNextPage"
+    (pageChanged)="getMags($event)">
 </pagination>
