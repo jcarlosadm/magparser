@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Magazine } from '../content/magazine';
 import { environment } from 'src/environments/environment';
 
@@ -22,7 +22,12 @@ export class MagazineService {
     };
   }
 
-  getTopics() {
-    return this.http.get<string[]>(`${this.api}/api/get_topics`);
+  getTopics(searchObj:any) {
+    let params = new HttpParams();
+    params = params.set('startDate', searchObj.startDate);
+    params = params.set('endDate', searchObj.endDate);
+    
+    return this.http.get<string[]>(`${this.api}/api/get_topics`, 
+      { params: params });
   }
 }

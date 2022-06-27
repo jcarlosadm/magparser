@@ -26,10 +26,20 @@ export class ControlsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.magService.getTopics().subscribe((data:string[]) => {
+    this.getTopics();
+  }
+
+  getTopics() {
+    this.magService.getTopics({
+      startDate:this.startDate.toISOString().slice(0, 10), 
+      endDate:this.endDate.toISOString().slice(0, 10)
+    })
+    .subscribe((data:string[]) => {
       this.topics = data;
       if (this.topics.length > 0){
         this.selectedTopic = this.topics[0];
+      } else {
+        this.selectedTopic = "";
       }
     });
   }
@@ -37,12 +47,14 @@ export class ControlsComponent implements OnInit {
   setStartDate(date:Date | null){
     if (date != null){
       this.startDate = date;
+      this.getTopics();
     }
   }
 
   setEndDate(date:Date | null) {
     if (date != null){
       this.endDate = date;
+      this.getTopics();
     }
   }
 
