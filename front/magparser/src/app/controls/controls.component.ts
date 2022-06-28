@@ -9,7 +9,7 @@ import { Filter } from './filter';
 })
 export class ControlsComponent implements OnInit {
 
-  topics:string[] = [];
+  topics:any = {};
   selectedTopic:string = '';
   startDate:Date;
   endDate:Date;
@@ -30,14 +30,11 @@ export class ControlsComponent implements OnInit {
   }
 
   getTopics() {
-    this.magService.getTopics({
-      startDate:this.startDate.toISOString().slice(0, 10), 
-      endDate:this.endDate.toISOString().slice(0, 10)
-    })
+    this.magService.getTopics()
     .subscribe((data:string[]) => {
       this.topics = data;
-      if (this.topics.length > 0){
-        this.selectedTopic = this.topics[0];
+      if (Object.keys(this.topics).length > 0){
+        this.selectedTopic = Object.keys(this.topics)[0];
       } else {
         this.selectedTopic = "";
       }

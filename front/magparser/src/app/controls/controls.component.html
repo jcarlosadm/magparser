@@ -9,7 +9,7 @@
                             <select class="form-control"
                             (change)="setTopic(topicField.value)"
                             #topicField>
-                                <option *ngFor="let topic of topics" [selected]="selectedTopic == topic">{{topic}}</option>
+                                <option *ngFor="let topic of topics | keyvalue" [selected]="selectedTopic == topic.key">{{topic.key}}</option>
                             </select>
                         </div>
                     </div>
