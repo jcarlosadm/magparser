@@ -4,21 +4,23 @@ from flask import jsonify
 from flask_cors import CORS, cross_origin
 from datetime import date, timedelta, datetime
 from topics import get_topics
+from flask_caching import Cache
+
+config = {
+    'CORS_HEADERS': 'Content-Type',
+    "CACHE_TYPE": "SimpleCache",
+    "CACHE_DEFAULT_TIMEOUT": 600
+}
 
 app = Flask(__name__)
 cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
+app.config.from_mapping(config)
+cache = Cache(app)
 
 @app.route("/api/get_topics")
 @cross_origin()
 def getTopics():
-    start_date = request.args.get('startDate', default = date.today() - timedelta(days=5), \
-        type = to_date).strftime("%Y-%m-%d")
-    end_date = request.args.get('endDate', default = date.today(), type = to_date)\
-        .strftime("%Y-%m-%d")
-
-    # TODO: use cache
-    return jsonify(get_topics(start_date, end_date))
+    return jsonify(get_topics(cache))
 
 def to_date(dateString):
     return datetime.strptime(dateString, "%Y-%m-%d").date()
