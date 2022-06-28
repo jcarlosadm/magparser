@@ -45,14 +45,14 @@ export class ControlsComponent implements OnInit {
   }
 
   setStartDate(date:Date | null){
-    if (date != null){
+    if (date != null && date.toISOString() != this.startDate.toISOString()){
       this.startDate = date;
       this.getTopics();
     }
   }
 
   setEndDate(date:Date | null) {
-    if (date != null){
+    if (date != null && date.toISOString() != this.endDate.toISOString()){
       this.endDate = date;
       this.getTopics();
     }
