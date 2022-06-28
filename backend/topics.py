@@ -41,7 +41,7 @@ def extract_date(html_item):
 
 def extract_topic(html_item):
     txt = html_item.find('div', {'class': 'index_box_tools'})\
-        .find('a').find_all(text=True)
+        .find('a').find_all(text=True)[0]
     return txt
 
 def format_date(date):
