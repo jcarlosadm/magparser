@@ -1,18 +1,10 @@
-from bs4 import BeautifulSoup
-import requests
 import re
 import json
 
+from utils import get_soup
+
 URL_1 = "http://www.ebook3000.com/"
 URL_2 = "http://www.ebook3000.com/Magazine/Military/index.html"
-
-def get_soup(url):
-    headers = requests.utils.default_headers()
-    headers.update({ 'User-Agent': 'Mozilla/5.0 \
-        (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'})
-    
-    req = requests.get(url, headers)
-    return BeautifulSoup(req.content, 'html.parser')
 
 def get_categories(topics, soup):
     div = soup.find(text=re.compile('Categories')).parent.parent.parent

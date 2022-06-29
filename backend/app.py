@@ -2,9 +2,10 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 from flask_cors import CORS, cross_origin
-from datetime import date, timedelta, datetime
-from topics import get_topics
 from flask_caching import Cache
+
+from topics import get_topics
+from mags import get_mags
 
 config = {
     'CORS_HEADERS': 'Content-Type',
@@ -22,8 +23,10 @@ cache = Cache(app)
 def getTopics():
     return jsonify(get_topics(cache))
 
-def to_date(dateString):
-    return datetime.strptime(dateString, "%Y-%m-%d").date()
+@app.route("/api/get_mags")
+@cross_origin()
+def getMags():
+    return jsonify(get_mags(request.args, cache))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=5000, debug=True)
