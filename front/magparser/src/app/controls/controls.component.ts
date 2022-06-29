@@ -10,18 +10,13 @@ import { Filter } from './filter';
 export class ControlsComponent implements OnInit {
 
   topics:any = {};
-  selectedTopic:string = '';
-  startDate:Date;
-  endDate:Date;
+  selectedTopic:string = 'All';
+  startDate:Date | null = null;
+  endDate:Date | null = null;
   searchTerm:string = "";
   filter:Filter;
 
   constructor(private magService:MagazineService) {
-    this.startDate = new Date();
-    this.startDate.setDate(this.startDate.getDate() - 5);
-
-    this.endDate = new Date();
-
     this.filter = new Filter(this.startDate, this.endDate, this.searchTerm);
   }
 
@@ -36,20 +31,24 @@ export class ControlsComponent implements OnInit {
       if (Object.keys(this.topics).length > 0){
         this.selectedTopic = Object.keys(this.topics)[0];
       } else {
-        this.selectedTopic = "";
+        this.selectedTopic = "All";
       }
     });
   }
 
   setStartDate(date:Date | null){
-    if (date != null && date.toISOString() != this.startDate.toISOString()){
+    if ((date != null && this.startDate != null && date.toISOString() != 
+        this.startDate.toISOString()) || (date != null && this.startDate == null) ||
+        (date == null && this.startDate != null)){
       this.startDate = date;
       this.getTopics();
     }
   }
 
   setEndDate(date:Date | null) {
-    if (date != null && date.toISOString() != this.endDate.toISOString()){
+    if ((date != null && this.endDate != null && date.toISOString() !=
+         this.endDate.toISOString()) || (date != null && this.endDate == null) ||
+         (date == null && this.endDate != null)){
       this.endDate = date;
       this.getTopics();
     }

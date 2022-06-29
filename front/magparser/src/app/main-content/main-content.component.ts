@@ -8,10 +8,10 @@ import { MagazineService } from './magazine-service.service';
   styleUrls: ['./main-content.component.css']
 })
 export class MainContentComponent implements OnChanges {
-  @Input() selectedTopic:string = "";
+  @Input() selectedTopic:string = "All";
   @Input() startDate:Date|null = null;
   @Input() endDate:Date|null = null;
-  @Input() searchTerm:string|null = null;
+  @Input() searchTerm:string|null = "";
 
   magazines:Magazine[] = [];
   currentPage:number = 1;
@@ -38,9 +38,11 @@ export class MainContentComponent implements OnChanges {
       this.currentPage = event.currentPage;
     }
 
-    var resultObj = this.magazineService.getMags(this.createSearchObj());
-    this.magazines = resultObj.mags;
-    this.hasNextPage = resultObj.hasNextPage;
+    this.magazineService.getMags(this.createSearchObj())
+      .subscribe((data:Magazine[]) => {
+        this.magazines = data;
+        this.hasNextPage = true;
+      });
   }
 
   ngOnChanges(changes: SimpleChanges): void {

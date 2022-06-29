@@ -13,13 +13,15 @@ export class MagazineService {
   constructor(private http: HttpClient) {}
 
   getMags(searchObj:any) {
-    return {
-      mags: [
-        new Magazine("mag1" + searchObj.selectedTopic), 
-        new Magazine("mag2" + searchObj.selectedTopic)
-      ],
-      hasNextPage: true
-    };
+    let params = new HttpParams();
+    params = params.set('selectedTopic', searchObj.selectedTopic);
+    params = params.set('startDate', searchObj.startDate);
+    params = params.set('endDate', searchObj.endDate);
+    params = params.set('searchTerm', searchObj.searchTerm);
+    params = params.set('currentPage', searchObj.currentPage);
+    params = params.set('maxContentPerPage', searchObj.maxContentPerPage);
+
+    return this.http.get<Magazine[]>(`${this.api}/api/get_mags`, { params : params });
   }
 
   getTopics() {
