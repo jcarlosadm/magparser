@@ -2,7 +2,7 @@ version: '3.5'
 services:
   runner:
     container_name: magparser
-    build: ..
+    build: .
     image: angular-image
     volumes:
       - '.:/usr/src/app' 
